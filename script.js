@@ -1,5 +1,6 @@
 //your JS code here. If required.
 // Function to return a promise after 3 seconds
+// Function to return a promise after 3 seconds
 function getData() {
     return new Promise(resolve => {
         setTimeout(() => {
@@ -18,7 +19,7 @@ getData()
                 resolve(filteredArray);
             }, 1000);
         });
-    })
+})
     .then(filteredArray => {
         // Multiply even numbers by 2
         const multipliedArray = filteredArray.map(num => num * 2);
