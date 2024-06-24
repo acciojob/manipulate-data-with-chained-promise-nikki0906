@@ -1,6 +1,7 @@
 //your JS code here. If required.
 // Function to return a promise after 3 seconds
-// Function to return a promise after 3 seconds
+
+
 function getData() {
     return new Promise(resolve => {
         setTimeout(() => {
@@ -9,7 +10,7 @@ function getData() {
     });
 }
 
-// Example usage of getData and chaining promises
+// Chain promises to manipulate data and update output
 getData()
     .then(array => {
         // Filter out odd numbers
@@ -19,7 +20,7 @@ getData()
                 resolve(filteredArray);
             }, 1000);
         });
-})
+    })
     .then(filteredArray => {
         // Multiply even numbers by 2
         const multipliedArray = filteredArray.map(num => num * 2);
@@ -37,3 +38,4 @@ getData()
     .catch(error => {
         console.error('Error:', error);
     });
+
