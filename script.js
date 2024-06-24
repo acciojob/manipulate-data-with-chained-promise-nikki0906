@@ -1,11 +1,15 @@
 //your JS code here. If required.
-function manipulateData(inputArray) {
-    // Return a promise that resolves after 3 seconds with the input array
+// Function to return a promise after 3 seconds
+function getData() {
     return new Promise(resolve => {
         setTimeout(() => {
-            resolve(inputArray);
+            resolve([1, 2, 3, 4]);
         }, 3000);
-    })
+    });
+}
+
+// Example usage of getData and chaining promises
+getData()
     .then(array => {
         // Filter out odd numbers
         const filteredArray = array.filter(num => num % 2 === 0);
@@ -32,4 +36,3 @@ function manipulateData(inputArray) {
     .catch(error => {
         console.error('Error:', error);
     });
-}
