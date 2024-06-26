@@ -1,41 +1,35 @@
-//your JS code here. If required.
-// Function to return a promise after 3 seconds
+function getNumbers() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve([1, 2, 3, 4]);
+                }, 3000);
+            });
+        }
 
+        // Step 2: Function to filter out odd numbers
+        function filterOddNumbers(numbers) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    const evenNumbers = numbers.filter(number => number % 2 === 0);
+                    document.getElementById("output").innerText = evenNumbers.join(', ');
+                    resolve(evenNumbers);
+                }, 1000);
+            });
+        }
 
-/* function getData() {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            resolve([1, 2, 3, 4]);
-        }, 3000);
-    });
-}
+        // Step 3: Function to multiply even numbers by 2
+        function multiplyByTwo(numbers) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    const multipliedNumbers = numbers.map(number => number * 2);
+                    document.getElementById("output").innerText = multipliedNumbers.join(', ');
+                    resolve(multipliedNumbers);
+                }, 2000);
+            });
+        }
 
-// Chain promises to manipulate data and update output
-getData()
-    .then(array => {
-        // Filter out odd numbers
-        const filteredArray = array.filter(num => num % 2 === 0);
-        return new Promise(resolve => {
-            setTimeout(() => {
-                resolve(filteredArray);
-            }, 1000);
-        });
-    })
-    .then(filteredArray => {
-        // Multiply even numbers by 2
-        const multipliedArray = filteredArray.map(num => num * 2);
-        return new Promise(resolve => {
-            setTimeout(() => {
-                resolve(multipliedArray);
-            }, 2000);
-        });
-    })
-    .then(finalArray => {
-        // Update the HTML output with the final array
-        const outputDiv = document.getElementById('output');
-        outputDiv.textContent = finalArray.join(', ');
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-
+        // Step 4: Chaining the promises
+        getNumbers()
+            .then(numbers => filterOddNumbers(numbers))
+            .then(evenNumbers => multiplyByTwo(evenNumbers))
+            .catch(error => console.error(error));
