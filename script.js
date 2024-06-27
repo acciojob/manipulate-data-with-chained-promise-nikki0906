@@ -1,4 +1,5 @@
 // Function to return a promise that resolves with an array of numbers after 3 seconds
+
 function getNumbers() {
     return new Promise((resolve) => {
         setTimeout(() => {
@@ -7,32 +8,44 @@ function getNumbers() {
     });
 }
 
-// Function to filter out odd numbers
 function filterOddNumbers(numbers) {
     return new Promise((resolve) => {
         setTimeout(() => {
-            const evenNumbers = numbers.filter(num => num % 2 === 0);
-            document.getElementById('output').innerText = `Even numbers: ${evenNumbers.join(', ')}`;
+            const evenNumbers = numbers.filter(number => number % 2 === 0);
             resolve(evenNumbers);
         }, 1000);
     });
 }
 
-// Function to multiply even numbers by 2
-function multiplyByTwo(numbers) {
+function multiplyEvenNumbers(numbers) {
     return new Promise((resolve) => {
         setTimeout(() => {
-            const multipliedNumbers = numbers.map(num => num * 2);
-            document.getElementById('output').innerText = `Multiplied numbers: ${multipliedNumbers.join(', ')}`;
+            const multipliedNumbers = numbers.map(number => number * 2);
             resolve(multipliedNumbers);
         }, 2000);
     });
 }
 
-// Chain the promises
-getNumbers()
-    .then(numbers => filterOddNumbers(numbers))
-    .then(evenNumbers => multiplyByTwo(evenNumbers))
-    .catch(error => {
-        document.getElementById('output').innerText = `Error: ${error}`;
-    });
+function manipulateData() {
+    const output = document.getElementById('output');
+
+    // Start with fetching the numbers
+    getNumbers()
+        .then(numbers => {
+            output.textContent = `Initial array: ${numbers}`;
+            return filterOddNumbers(numbers);
+        })
+        .then(evenNumbers => {
+            output.textContent = `Even numbers: ${evenNumbers}`;
+            return multiplyEvenNumbers(evenNumbers);
+        })
+        .then(multipliedNumbers => {
+            output.textContent = `Multiplied numbers: ${multipliedNumbers}`;
+        })
+        .catch(error => {
+            output.textContent = `Error: ${error.message}`;
+        });
+}
+
+// Call the function to start the process
+manipulateData();
